@@ -4,7 +4,7 @@
 
 
 using Microsoft.EntityFrameworkCore;
-using TarefasApi;
+using ProdutosApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
