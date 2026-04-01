@@ -21,7 +21,7 @@ public class CategoriaController : ControllerBase
         return Ok(categorias);
     }
 
-    [HttpGet("{id:int}", Name = "GetCategoria")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<Categoria>> GetByIdAsync(int id)
     {
         var categoria = await _context.Categorias.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
@@ -39,7 +39,7 @@ public class CategoriaController : ControllerBase
         _context.Categorias.Add(categoria);
         await _context.SaveChangesAsync();
 
-        return CreatedAtRoute("GetCategoria", new { id = categoria.Id }, categoria);
+        return StatusCode(201, categoria);
     }
 
     [HttpPut("{id:int}")]
