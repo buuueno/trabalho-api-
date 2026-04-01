@@ -5,14 +5,11 @@
 
 using Microsoft.EntityFrameworkCore;
 using ProdutosApi;
+using ProdutosApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var conn = builder
-            .Configuration
-            .GetConnectionString("ConnPadrao");
-
-builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(conn, ServerVersion.AutoDetect(conn)));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("TestDb"));
 
 //Criando politica de Cors
 builder.Services.AddCors(options =>
@@ -27,7 +24,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddControllers(); //Habilitar controllers MVC
+builder.Services.AddControllers(options => options.Filters.Add<ValidationFilterAttribute>()); //Habilitar controllers MVC
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

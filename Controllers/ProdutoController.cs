@@ -21,7 +21,7 @@ public class ProdutoController : ControllerBase
         return Ok(produtos);
     }
 
-    [HttpGet("{id:int}", Name = "GetProdutoById")]
+    [HttpGet("{id:int}", Name = "GetProduto")]
     public async Task<ActionResult<Produto>> GetByIdAsync(int id)
     {
         var produto = await _context.Produtos.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
@@ -39,7 +39,7 @@ public class ProdutoController : ControllerBase
         _context.Produtos.Add(produto);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetByIdAsync), new { id = produto.Id }, produto);
+        return CreatedAtRoute("GetProduto", new { id = produto.Id }, produto);
     }
 
     [HttpPut("{id:int}")]

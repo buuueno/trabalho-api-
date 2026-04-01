@@ -21,7 +21,7 @@ public class ClienteController : ControllerBase
         return Ok(clientes);
     }
 
-    [HttpGet("{id:int}", Name = "GetClienteById")]
+    [HttpGet("{id:int}", Name = "GetCliente")]
     public async Task<ActionResult<Cliente>> GetByIdAsync(int id)
     {
         var cliente = await _context.Clientes.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
@@ -39,7 +39,7 @@ public class ClienteController : ControllerBase
         _context.Clientes.Add(cliente);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetByIdAsync), new { id = cliente.Id }, cliente);
+        return CreatedAtRoute("GetCliente", new { id = cliente.Id }, cliente);
     }
 
     [HttpPut("{id:int}")]
