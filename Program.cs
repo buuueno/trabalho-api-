@@ -9,7 +9,7 @@ using ProdutosApi.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("TestDb"));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("trabalho"));
 
 //Criando politica de Cors
 builder.Services.AddCors(options =>
